@@ -7,7 +7,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) {
  *
  * @package TeConnect
  * @author tianlingzi
- * @version 1.0
+ * @version 2.0
  * @link https://www.tianlingzi.top
  *
  */
