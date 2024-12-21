@@ -75,7 +75,7 @@ class TeConnect_Plugin implements Typecho_Plugin_Interface
         $form->addInput($connect);
 
         //强制绑定
-        $custom = new Typecho_Widget_Helper_Form_Element_Radio('custom', array(1=>_t('是'),0=>'否'), 0, _t('是否需要完善资料'), _t('用户使用社会化登录后，是否需要完善昵称、邮箱等信息；选择不需要完善资料则直接使用获取到的昵称。'));
+        $custom = new Typecho_Widget_Helper_Form_Element_Radio('custom', array(1=>_t('是'),0=>'否'), 1, _t('是否需要完善资料'), _t('用户使用社会化登录后，是否需要完善昵称、邮箱等信息；选择不需要完善资料则直接使用获取到的昵称。'));
         $form->addInput($custom);
     }
 
