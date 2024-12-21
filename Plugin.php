@@ -24,7 +24,7 @@ class TeConnect_Plugin implements Typecho_Plugin_Interface
     {
         $info = self::installDb();
 
-        //SNS帐号登录
+        //添加oauth路由
         Helper::addRoute('oauth', '/oauth', 'TeConnect_Widget', 'oauth');
         Helper::addRoute('oauth_callback', '/oauth_callback', 'TeConnect_Widget', 'callback');
 

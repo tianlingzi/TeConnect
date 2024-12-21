@@ -9,6 +9,27 @@ return array(
         'APP_SECRET'    => '', //应用注册成功后分配的KEY
         'CALLBACK'      => URL_CALLBACK . 'qq',
     ),
+    //Github配置
+    'THINK_SDK_GITHUB'  => array(
+        'NAME'      => 'Github',
+        'APP_KEY'       => '', //应用注册成功后分配的 APP ID
+        'APP_SECRET'    => '', //应用注册成功后分配的KEY
+        'CALLBACK'      => URL_CALLBACK . 'github',
+    ),
+    //MSN配置
+    'THINK_SDK_MSN'     => array(
+        'NAME'      => 'MSN',
+        'APP_KEY'       => '', //应用注册成功后分配的 APP ID
+        'APP_SECRET'    => '', //应用注册成功后分配的KEY
+        'CALLBACK'      => URL_CALLBACK . 'msn',
+    ),
+    //Google配置
+    'THINK_SDK_GOOGLE'  => array(
+        'NAME'      => 'Google',
+        'APP_KEY'       => '', //应用注册成功后分配的 APP ID
+        'APP_SECRET'    => '', //应用注册成功后分配的KEY
+        'CALLBACK'      => URL_CALLBACK . 'google',
+    ),
     //腾讯微博配置
     'THINK_SDK_TENCENT' => array(
         'NAME'      => '腾讯微博',
@@ -50,27 +71,6 @@ return array(
         'APP_KEY'       => '', //应用注册成功后分配的 APP ID
         'APP_SECRET'    => '', //应用注册成功后分配的KEY
         'CALLBACK'      => URL_CALLBACK . 'douban',
-    ),
-    //Github配置
-    'THINK_SDK_GITHUB'  => array(
-        'NAME'      => 'Github',
-        'APP_KEY'       => '', //应用注册成功后分配的 APP ID
-        'APP_SECRET'    => '', //应用注册成功后分配的KEY
-        'CALLBACK'      => URL_CALLBACK . 'github',
-    ),
-    //Google配置
-    'THINK_SDK_GOOGLE'  => array(
-        'NAME'      => 'Google',
-        'APP_KEY'       => '', //应用注册成功后分配的 APP ID
-        'APP_SECRET'    => '', //应用注册成功后分配的KEY
-        'CALLBACK'      => URL_CALLBACK . 'google',
-    ),
-    //MSN配置
-    'THINK_SDK_MSN'     => array(
-        'NAME'      => 'MSN',
-        'APP_KEY'       => '', //应用注册成功后分配的 APP ID
-        'APP_SECRET'    => '', //应用注册成功后分配的KEY
-        'CALLBACK'      => URL_CALLBACK . 'msn',
     ),
     //点点配置
     'THINK_SDK_DIANDIAN'=> array(
