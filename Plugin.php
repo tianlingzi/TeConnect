@@ -6,11 +6,10 @@ if (!defined('__TYPECHO_ROOT_DIR__')) {
  * Typecho互联，支持15种第三方登录：QQ/腾讯微博/新浪微博/网易微博/人人网/360/豆瓣/Github/Google/Msn/点点/淘宝网/百度/开心网/搜狐
  *
  * @package TeConnect
- * @author 大卫科技Blog
- * @version 2.0
- * @link https://www.iyuu.cn
+ * @author tianlingzi
+ * @version 1.0
+ * @link https://www.tianlingzi.top
  *
- * 使用了麦当苗儿SDK http://topthink.com，适配修改为typecho
  */
 class TeConnect_Plugin implements Typecho_Plugin_Interface
 {
