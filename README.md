@@ -49,17 +49,11 @@ document.cookie = "TeConnect_Referer=" + encodeURI(window.location.href) + "; ex
 Github | github | github:APP_KEY,APP_SECRET,Github | https://127.0.0.1/oauth_callback?type=github
 MSN | msn | msn:APP_KEY,APP_SECRET,MSN | https://127.0.0.1/oauth_callback?type=msn
 Google | google | google:APP_KEY,APP_SECRET,Google | https://127.0.0.1/oauth_callback?type=google
-腾讯微博 | tencent | tencent:APP_KEY,APP_SECRET,腾讯微博 | https://127.0.0.1/oauth_callback?type=tencent
 新浪微博 | sina | sina:APP_KEY,APP_SECRET,新浪微博 | https://127.0.0.1/oauth_callback?type=sina
-网易微博 | t163 | t163:APP_KEY,APP_SECRET,网易微博 | https://127.0.0.1/oauth_callback?type=t163
-人人网 | renren | renren:APP_KEY,APP_SECRET,人人网 | https://127.0.0.1/oauth_callback?type=renren
-360 | x360 | x360:APP_KEY,APP_SECRET,360 | https://127.0.0.1/oauth_callback?type=x360
 豆瓣 | douban | douban:APP_KEY,APP_SECRET,豆瓣 | https://127.0.0.1/oauth_callback?type=douban
 点点 | diandian | diandian:APP_KEY,APP_SECRET,点点 | https://127.0.0.1/oauth_callback?type=diandian
 淘宝网 | taobao | taobao:APP_KEY,APP_SECRET,淘宝网 | https://127.0.0.1/oauth_callback?type=taobao
 百度 | baidu | baidu:APP_KEY,APP_SECRET,百度 | https://127.0.0.1/oauth_callback?type=baidu
-开心网 | kaixin | kaixin:APP_KEY,APP_SECRET,开心网 | https://127.0.0.1/oauth_callback?type=kaixin
-搜狐微博 | sohu | sohu:APP_KEY,APP_SECRET,搜狐微博 | https://127.0.0.1/oauth_callback?type=sohu
 
 ### 1：后台互联配置
 具体格式为：`type:appid,appkey,title`，注释：

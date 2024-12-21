@@ -30,13 +30,6 @@ return array(
         'APP_SECRET'    => '', //应用注册成功后分配的KEY
         'CALLBACK'      => URL_CALLBACK . 'google',
     ),
-    //腾讯微博配置
-    'THINK_SDK_TENCENT' => array(
-        'NAME'      => '腾讯微博',
-        'APP_KEY'       => '', //应用注册成功后分配的 APP ID
-        'APP_SECRET'    => '', //应用注册成功后分配的KEY
-        'CALLBACK'      => URL_CALLBACK . 'tencent',
-    ),
     //新浪微博配置
     'THINK_SDK_SINA'    => array(
         'NAME'      => '新浪微博',
@@ -44,28 +37,7 @@ return array(
         'APP_SECRET'    => '', //应用注册成功后分配的KEY
         'CALLBACK'      => URL_CALLBACK . 'sina',
     ),
-    //网易微博配置
-    'THINK_SDK_T163'    => array(
-        'NAME'      => '网易微博',
-        'APP_KEY'       => '', //应用注册成功后分配的 APP ID
-        'APP_SECRET'    => '', //应用注册成功后分配的KEY
-        'CALLBACK'      => URL_CALLBACK . 't163',
-    ),
-    //人人网配置
-    'THINK_SDK_RENREN'  => array(
-        'NAME'      => '人人网',
-        'APP_KEY'       => '', //应用注册成功后分配的 APP ID
-        'APP_SECRET'    => '', //应用注册成功后分配的KEY
-        'CALLBACK'      => URL_CALLBACK . 'renren',
-    ),
-    //360配置
-    'THINK_SDK_X360'    => array(
-        'NAME'      => '360',
-        'APP_KEY'       => '', //应用注册成功后分配的 APP ID
-        'APP_SECRET'    => '', //应用注册成功后分配的KEY
-        'CALLBACK'      => URL_CALLBACK . 'x360',
-    ),
-    //豆瓣配置
+     //豆瓣配置
     'THINK_SDK_DOUBAN'  => array(
         'NAME'      => '豆瓣',
         'APP_KEY'       => '', //应用注册成功后分配的 APP ID
@@ -92,19 +64,5 @@ return array(
         'APP_KEY'       => '', //应用注册成功后分配的 APP ID
         'APP_SECRET'    => '', //应用注册成功后分配的KEY
         'CALLBACK'      => URL_CALLBACK . 'baidu',
-    ),
-    //开心网配置
-    'THINK_SDK_KAIXIN'  => array(
-        'NAME'      => '开心网',
-        'APP_KEY'       => '', //应用注册成功后分配的 APP ID
-        'APP_SECRET'    => '', //应用注册成功后分配的KEY
-        'CALLBACK'      => URL_CALLBACK . 'kaixin',
-    ),
-    //搜狐微博配置
-    'THINK_SDK_SOHU'    => array(
-        'NAME'      => '搜狐微博',
-        'APP_KEY'       => '', //应用注册成功后分配的 APP ID
-        'APP_SECRET'    => '', //应用注册成功后分配的KEY
-        'CALLBACK'      => URL_CALLBACK . 'sohu',
     ),
 );

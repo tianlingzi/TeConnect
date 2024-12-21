@@ -274,7 +274,7 @@ class TeConnect_Widget extends Widget_Abstract_Users
     }
 
     //处理用户与第三方账号的绑定关系（逻辑复杂）
-    // 同一用户，可以绑定15种不同的登录方式！但是，同类型的第三方账号仅可绑定一个！
+    // 同一用户，可以绑定不同的登录方式！但是，同类型的第三方账号仅可绑定一个！
     protected function bindUser($uid, $oauth_user, $type)
     {
         $oauth_user['uid'] = $uid;
@@ -386,22 +386,6 @@ class TeConnect_Widget extends Widget_Abstract_Users
         }
     }
 
-    //登录成功，获取腾讯微博用户信息
-    public function tencent($token)
-    {
-        $tencent = ThinkOauth::getInstance('tencent', $token);
-        $data    = $tencent->call('user/info');
-        if ($data['ret'] == 0) {
-            $userInfo['name'] = $data['data']['name'];
-            $userInfo['nickname'] = $data['data']['nick'];
-            $userInfo['head_img'] = $data['data']['head'];
-            $userInfo['gender'] = 0;
-            return $userInfo;
-        } else {
-            //throw_exception("获取腾讯微博用户信息失败：{$data['msg']}");
-        }
-    }
-
     //登录成功，获取新浪微博用户信息
     public function sina($token)
     {
@@ -417,55 +401,7 @@ class TeConnect_Widget extends Widget_Abstract_Users
             //throw_exception("获取新浪微博用户信息失败：{$data['error']}");
         }
     }
-
-    //登录成功，获取网易微博用户信息
-    public function t163($token)
-    {
-        $t163 = ThinkOauth::getInstance('t163', $token);
-        $data = $t163->call('users/show');
-        if ($data['error_code'] == 0) {
-            $userInfo['name'] = $data['name'];
-            $userInfo['nickname'] = $data['screen_name'];
-            $userInfo['head_img'] = str_replace('w=48&h=48', 'w=180&h=180', $data['profile_image_url']);
-            $userInfo['gender'] = 0;
-            return $userInfo;
-        } else {
-            //throw_exception("获取网易微博用户信息失败：{$data['error']}");
-        }
-    }
-
-    //登录成功，获取人人网用户信息
-    public function renren($token)
-    {
-        $renren = ThinkOauth::getInstance('renren', $token);
-        $data   = $renren->call('user/get');
-        if (!isset($data['error'])) {
-            $userInfo['name'] = $data['response']['name'];
-            $userInfo['nickname'] = $data['response']['name'];
-            $userInfo['head_img'] = $data['response']['avatar'][3]['url'];
-            $userInfo['gender'] = 0;
-            return $userInfo;
-        } else {
-            //throw_exception("获取人人网用户信息失败：{$data['error_msg']}");
-        }
-    }
-
-    //登录成功，获取360用户信息
-    public function x360($token)
-    {
-        $x360 = ThinkOauth::getInstance('x360', $token);
-        $data = $x360->call('user/me');
-        if ($data['error_code'] == 0) {
-            $userInfo['name'] = $data['name'];
-            $userInfo['nickname'] = $data['name'];
-            $userInfo['head_img'] = $data['avatar'];
-            $userInfo['gender'] = 0;
-            return $userInfo;
-        } else {
-            //throw_exception("获取360用户信息失败：{$data['error']}");
-        }
-    }
-
+    
     //登录成功，获取豆瓣用户信息
     public function douban($token)
     {
@@ -577,38 +513,6 @@ class TeConnect_Widget extends Widget_Abstract_Users
             return $userInfo;
         } else {
             //throw_exception("获取百度用户信息失败：{$data['error_msg']}");
-        }
-    }
-
-    //登录成功，获取开心网用户信息
-    public function kaixin($token)
-    {
-        $kaixin = ThinkOauth::getInstance('kaixin', $token);
-        $data   = $kaixin->call('users/me');
-        if (!empty($data['uid'])) {
-            $userInfo['name'] = $data['uid'];
-            $userInfo['nickname'] = $data['name'];
-            $userInfo['head_img'] = $data['logo50'];
-            $userInfo['gender'] = 0;
-            return $userInfo;
-        } else {
-            //throw_exception("获取开心网用户信息失败：{$data['error']}");
-        }
-    }
-
-    //登录成功，获取搜狐用户信息
-    public function sohu($token)
-    {
-        $sohu = ThinkOauth::getInstance('sohu', $token);
-        $data = $sohu->call('user/get_info');
-        if ('success' == $data['message'] && !empty($data['data'])) {
-            $userInfo['name'] = $data['data']['open_id'];
-            $userInfo['nickname'] = $data['data']['nick'];
-            $userInfo['head_img'] = $data['data']['icon'];
-            $userInfo['gender'] = 0;
-            return $userInfo;
-        } else {
-            //throw_exception("获取搜狐用户信息失败：{$data['message']}");
         }
     }
 }
