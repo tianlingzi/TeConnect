@@ -15,19 +15,21 @@ typecho第三方登录插件
 ----------
 
 ## 二、插件下载
-
+https://github.com/tianlingzi/TeConnect/releases
 
 ----------
 
 ## 三、安装步骤
- 1. 解压插件到`Plugins`目录，把TeConnect插件目录下的callback.php文件拷贝到当前使用的主题跟目录下面
- 2. 在后台启用插件，并配置插件参数（方法见：参数配置 - 配置示例）；
- 3. 在当前使用主题的适当位置添加`TeConnect_Plugin::show()`方法，代码：
+ 1. 解压插件到`Plugins`目录；
+ 2. 将文件名改为“TeConnect”；
+ 3. 把TeConnect插件目录下的callback.php文件拷贝到当前使用的主题跟目录下面；
+ 4. 在后台启用插件，并配置插件参数（方法见：参数配置 - 配置示例）；
+ 5. 在当前使用主题的适当位置添加`TeConnect_Plugin::show()`方法，代码：
    ```php
 <?php TeConnect_Plugin::show(); ?>
    ```
- 4. 在第三方平台设置网站回调域，注意区分http、https（方法见：参数配置 - 配置示例）。
-  5. 如果您的主题开启了全站PJAX，需要把以下代码放入PJAX回调函数内：
+ 6. 在第三方平台设置网站回调域，注意区分http、https（方法见：参数配置 - 配置示例）。
+ 7. 如果您的主题开启了全站PJAX，需要把以下代码放入PJAX回调函数内：
 
 ```
 /*PJAX时：来源页写入cookie*/
