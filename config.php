@@ -9,6 +9,13 @@ return array(
         'APP_SECRET'    => '', //应用注册成功后分配的KEY
         'CALLBACK'      => URL_CALLBACK . 'qq',
     ),
+    //微信配置
+    'THINK_SDK_WECHAT'  => array(
+        'NAME'      => '微信',
+        'APP_KEY'       => '', //应用注册成功后分配的 APP ID
+        'APP_SECRET'    => '', //应用注册成功后分配的KEY
+        'CALLBACK'      => URL_CALLBACK. 'wechat',
+    ),
     //Github配置
     'THINK_SDK_GITHUB'  => array(
         'NAME'      => 'Github',

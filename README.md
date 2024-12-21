@@ -10,9 +10,9 @@ typecho第三方登录插件
 本人于2024年年底，在使用过程中，结合上面三位作者的修改进行融合修复，修改了部分设置和功能融合，在此特别说明并向三位作者的贡献表示感谢。
 
 ## 一、功能介绍
-**Typecho互联登录插件，目前已支持的第三方登录：QQ/Github/Msn/Google/新浪微博/豆瓣/点点/淘宝网/百度。**
-后续会根据实际需要继续添加新的第三方接口，欢迎大家一起贡献。
-如使用过程中遇到问题，可到这篇文章下留言，我会尽快解决。 https://www.tianlingzi.top/archives/131
+ **Typecho互联登录插件，目前已支持的第三方登录：QQ/微信/Github/Msn/Google/新浪微博/豆瓣/点点/淘宝网/百度。**
+ 后续会根据实际需要继续添加新的第三方接口，欢迎大家一起贡献。
+ 如使用过程中遇到问题，可到这篇文章下留言，我会尽快解决。 https://www.tianlingzi.top/archives/131
 
 
 ----------
@@ -25,14 +25,13 @@ https://github.com/tianlingzi/TeConnect/releases
 ## 三、安装步骤
  1. 解压插件到`Plugins`目录；
  2. 将文件名改为“TeConnect”；
- 3. 把TeConnect插件目录下的callback.php文件拷贝到当前使用的主题跟目录下面；
- 4. 在后台启用插件，并配置插件参数（方法见：参数配置 - 配置示例）；
- 5. 在当前使用主题的适当位置添加`TeConnect_Plugin::show()`方法，代码：
+ 3. 在后台启用插件，并配置插件参数（方法见：参数配置 - 配置示例）；
+ 4. 在当前使用主题的适当位置添加`TeConnect_Plugin::show()`方法，代码：
    ```php
 <?php TeConnect_Plugin::show(); ?>
    ```
- 6. 在第三方平台设置网站回调域，注意区分http、https（方法见：参数配置 - 配置示例）。
- 7. 如果您的主题开启了全站PJAX，需要把以下代码放入PJAX回调函数内：
+ 5. 在第三方平台设置网站回调域，注意区分http、https（方法见：参数配置 - 配置示例）。
+ 6. 如果您的主题开启了全站PJAX，需要把以下代码放入PJAX回调函数内：
 
 ```
 /*PJAX时：来源页写入cookie*/
@@ -49,6 +48,7 @@ document.cookie = "TeConnect_Referer=" + encodeURI(window.location.href) + "; ex
 名称 | 类型 | 配置示例 | 网站回调域
 -|-|-|-
 腾讯QQ | qq | qq:APP_KEY,APP_SECRET,腾讯QQ | https://127.0.0.1/oauth_callback?type=qq
+微信 | Wechat | qq:APP_KEY,APP_SECRET,微信 | https://127.0.0.1/oauth_callback?type=Wechat
 Github | github | github:APP_KEY,APP_SECRET,Github | https://127.0.0.1/oauth_callback?type=github
 MSN | msn | msn:APP_KEY,APP_SECRET,MSN | https://127.0.0.1/oauth_callback?type=msn
 Google | google | google:APP_KEY,APP_SECRET,Google | https://127.0.0.1/oauth_callback?type=google

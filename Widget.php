@@ -68,7 +68,7 @@ class TeConnect_Widget extends Widget_Abstract_Users
                 $_SESSION['TeConnect_Referer'] = $this->referer;
             }
             //302重定向
-            $this->response->redirect($sdk->getRequestCodeURL());
+            $this->response->redirect($sdk->getRequestCodeURL($type));
         }
     }
     /**
@@ -128,7 +128,7 @@ class TeConnect_Widget extends Widget_Abstract_Users
             require_once 'ThinkOauth.php';
             $sdk = ThinkOauth::getInstance($type);
             //请求接口(返回值包含openid)
-            $token = $sdk->getAccessToken($code);
+            $token = $sdk->getAccessToken($type, $code);
             if (is_array($token)) {
                 //获取第三方账号数据
                 $user_info = $this->$type($token);
@@ -223,7 +223,6 @@ class TeConnect_Widget extends Widget_Abstract_Users
     //注册新用户
     protected function doCallbackReg()
     {
-        $url = $this->request->get('url');
 
         $validator = new Typecho_Validate();
         $validator->addRule('mail', 'required', _t('必须填写电子邮箱'));
@@ -235,9 +234,6 @@ class TeConnect_Widget extends Widget_Abstract_Users
         $validator->addRule('screenName', 'xssCheck', _t('请不要在昵称中使用特殊字符'));
         $validator->addRule('screenName', array($this, 'screenNameExists'), _t('昵称已经存在'));
 
-        if ($url) {
-            $validator->addRule('url', 'url', _t('个人主页地址格式错误'));
-        }
 
         /** 截获验证异常 */
         if ($error = $validator->run($this->request->from('mail', 'screenName', 'url'))) {
@@ -383,6 +379,29 @@ class TeConnect_Widget extends Widget_Abstract_Users
             return $userInfo;
         } else {
             $this->widget('Widget_Notice')->set(array("获取腾讯QQ用户信息失败：{$data['msg']}"), 'error');
+        }
+    }
+
+    //登录成功，获取微信用户信息
+    public function wechat($token)
+    {
+        $wechat = ThinkOauth::getInstance('wechat', $token);
+        $data = $wechat->call('sns/userinfo');
+        if (empty($data['errcode'])) {
+            $userInfo['name'] = $data['nickname'];
+            $userInfo['nickname'] = $data['nickname'];
+            $userInfo['head_img'] = $data['headimgurl'];
+
+            if ($data['sex'] == 1) {
+                $userInfo['gender'] = 1;
+            } elseif ($data['sex'] == 2) {
+                $userInfo['gender'] = 2;
+            } else {
+                $userInfo['gender'] = 0;
+            }
+            return $userInfo;
+        } else {
+            $this->widget('Widget_Notice')->set(array("获取用户信息失败：{$data['msg']}"), 'error');
         }
     }
 

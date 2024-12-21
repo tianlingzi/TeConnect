@@ -3,7 +3,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) {
     exit;
 }
 /**
- * Typecho互联，支持14种第三方登录：QQ/新浪微博/网易微博/人人网/360/豆瓣/Github/Google/Msn/点点/淘宝网/百度/开心网/搜狐
+ * Typecho互联，已支持的第三方登录：QQ/微信/Github/Msn/Google/新浪微博/豆瓣/点点/淘宝网/百度
  *
  * @package TeConnect
  * @author tianlingzi
