@@ -7,7 +7,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) {
  *
  * @package TeConnect
  * @author tianlingzi
- * @version 2.0
+ * @version 3.0
  * @link https://www.tianlingzi.top
  *
  */
@@ -27,6 +27,9 @@ class TeConnect_Plugin implements Typecho_Plugin_Interface
         //添加oauth路由
         Helper::addRoute('oauth', '/oauth', 'TeConnect_Widget', 'oauth');
         Helper::addRoute('oauth_callback', '/oauth_callback', 'TeConnect_Widget', 'callback');
+        // 新增：管理页与开关路由
+        Helper::addRoute('connect_manage', '/connect/manage', 'TeConnect_Widget', 'manage');
+        Helper::addRoute('connect_toggle', '/connect/toggle', 'TeConnect_Widget', 'toggle');
 
         return _t($info);
     }
@@ -43,6 +46,9 @@ class TeConnect_Plugin implements Typecho_Plugin_Interface
     {
         Helper::removeRoute('oauth');
         Helper::removeRoute('oauth_callback');
+        // 新增：移除管理页与开关路由
+        Helper::removeRoute('connect_manage');
+        Helper::removeRoute('connect_toggle');
         //删除数据表
         return self::removeTable();
     }
@@ -80,7 +86,9 @@ class TeConnect_Plugin implements Typecho_Plugin_Interface
     }
 
     /**
-     * 个人用户的配置面板
+     * 个人用户的配置面板（精简版）
+     *
+     * 仅显示标题与按钮链接到管理页面，不添加任何表单输入，隐藏保存按钮。
      *
      * @access public
      * @param Typecho_Widget_Helper_Form $form
@@ -88,6 +96,26 @@ class TeConnect_Plugin implements Typecho_Plugin_Interface
      */
     public static function personalConfig(Typecho_Widget_Helper_Form $form)
     {
+        // 使用表单元素以兼容Typecho渲染流程，避免null->value()报错
+        $btnHtml = '<a class="typecho-button primary teconnect-manage-btn" href="/connect/manage" target="_blank">打开管理页面</a>';
+        $open = new Typecho_Widget_Helper_Form_Element_Text(
+            'open_manage',
+            null,
+            null,
+            '',
+            _t($btnHtml)
+        );
+        // 隐藏文本输入框本体，仅展示描述中的按钮
+        $open->input->setAttribute('style', 'display:none');
+        // 不再隐藏label，保留空标题以保证描述内容可见
+        $form->addInput($open);
+        // 隐藏保存按钮，保持极简UI + 按钮美化样式
+        echo '<style>
+            .typecho-option .submit{display:none!important;}
+            .teconnect-manage-btn{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,#1677ff,#69adff);border:0;color:#fff;padding:8px 14px;border-radius:8px;box-shadow:0 6px 12px rgba(22,119,255,.25);transition:transform .15s ease, box-shadow .15s ease;text-decoration:none;}
+            .teconnect-manage-btn:hover{transform:translateY(-1px);box-shadow:0 10px 16px rgba(22,119,255,.35);} 
+            .teconnect-manage-btn:active{transform:translateY(0);} 
+        </style>';
     }
 
     /**
@@ -104,6 +132,7 @@ class TeConnect_Plugin implements Typecho_Plugin_Interface
             }
         }
     }
+
     //添加数据表
     public static function addTable()
     {
@@ -136,6 +165,7 @@ class TeConnect_Plugin implements Typecho_Plugin_Interface
         }
         return "数据表oauth_user安装成功！";
     }
+
     //删除数据表
     public static function removeTable()
     {
@@ -148,6 +178,7 @@ class TeConnect_Plugin implements Typecho_Plugin_Interface
         }
         return "删除oauth_user表成功！";
     }
+
     //在前端调用显示登录按钮
     public static function show($text = false)
     {
@@ -174,6 +205,7 @@ class TeConnect_Plugin implements Typecho_Plugin_Interface
         }
         echo $html;
     }
+
     //读取插件配置，返回数组
     public static function options($type='')
     {

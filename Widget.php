@@ -1,4 +1,8 @@
 <?php
+if (!defined('__TYPECHO_ROOT_DIR__')) {
+    exit;
+}
+
 class TeConnect_Widget extends Widget_Abstract_Users
 {
     private $auth;
@@ -108,7 +112,12 @@ class TeConnect_Widget extends Widget_Abstract_Users
             $this->$func();
             unset($_SESSION['__typecho_auth']);
             unset($_SESSION['__typecho_oauth_user']);
-            $this->response->redirect(empty($this->referer) ? $this->options->index : $this->referer);
+            $redirect = empty($this->referer) ? $this->options->index : $this->referer;
+            $manage = Typecho_Common::url('/connect/manage', $this->options->index);
+            if (0 === strpos($redirect, $manage)) {
+                $redirect = Typecho_Common::url('/connect/manage?toast=on&type=' . $this->auth['type'], $this->options->index);
+            }
+            $this->response->redirect($redirect);
         }
 
         //第三方登录回调处理
@@ -159,7 +168,12 @@ class TeConnect_Widget extends Widget_Abstract_Users
             $this->bindUser($this->user->uid, $oauth_user, $this->auth['type']);
             //提示，并跳转
             $this->widget('Widget_Notice')->set(array('成功绑定账号!'));
-            $this->response->redirect(empty($this->referer) ? $this->options->index : $this->referer);
+            $redirect = empty($this->referer) ? $this->options->index : $this->referer;
+            $manage = Typecho_Common::url('/connect/manage', $this->options->index);
+            if (0 === strpos($redirect, $manage)) {
+                $redirect = Typecho_Common::url('/connect/manage?toast=on&type=' . $this->auth['type'], $this->options->index);
+            }
+            $this->response->redirect($redirect);
         } else {
             //未登录状态，查询第三方账号的绑定关系
             $isConnect = $this->findConnectUser($oauth_user, $this->auth['type']);
@@ -168,7 +182,12 @@ class TeConnect_Widget extends Widget_Abstract_Users
                 $this->useUidLogin($isConnect['uid']);
                 //提示，并跳转
                 $this->widget('Widget_Notice')->set(array('已成功登陆!'));
-                $this->response->redirect(empty($this->referer) ? $this->options->index : $this->referer);
+                $redirect = empty($this->referer) ? $this->options->index : $this->referer;
+                $manage = Typecho_Common::url('/connect/manage', $this->options->index);
+                if (0 === strpos($redirect, $manage)) {
+                    $redirect = Typecho_Common::url('/connect/manage?toast=on&type=' . $this->auth['type'], $this->options->index);
+                }
+                $this->response->redirect($redirect);
             }
 
             //未登录状态且未绑定，控制显示绑定界面
@@ -186,7 +205,12 @@ class TeConnect_Widget extends Widget_Abstract_Users
                 } else {
                     $this->widget('Widget_Notice')->set(array('注册用户失败!'), 'error');
                 }
-                $this->response->redirect(empty($this->referer) ? $this->options->index : $this->referer);
+                $redirect = empty($this->referer) ? $this->options->index : $this->referer;
+                $manage = Typecho_Common::url('/connect/manage', $this->options->index);
+                if (0 === strpos($redirect, $manage)) {
+                    $redirect = Typecho_Common::url('/connect/manage?toast=on&type=' . $this->auth['type'], $this->options->index);
+                }
+                $this->response->redirect($redirect);
             } else {
                 //用户绑定界面
                 if (!isset($_SESSION['__typecho_auth'])) {
@@ -359,7 +383,51 @@ class TeConnect_Widget extends Widget_Abstract_Users
         require $this->_themeDir . $fileName;
     }
 
-    //登录成功，获取腾讯QQ用户信息
+    /**
+     * 管理已绑定的第三方登录
+     */
+    public function manage()
+    {
+        if (!$this->user->hasLogin()) {
+            $this->response->redirect(Typecho_Common::url('/', $this->options->index));
+        }
+        $this->render('manage.php');
+    }
+
+    /**
+     * 切换绑定状态：开启(跳转绑定) / 关闭(清除绑定)
+     */
+    public function toggle()
+    {
+        if (!$this->user->hasLogin()) {
+            $this->response->redirect(Typecho_Common::url('/', $this->options->index));
+        }
+        $type = strtolower($this->request->get('type'));
+        $action = strtolower($this->request->get('action'));
+        if (empty($type) || empty($action)) {
+            $this->widget('Widget_Notice')->set(_t('参数缺失'), null, 'error');
+            $this->response->redirect(Typecho_Common::url('/connect/manage', $this->options->index));
+        }
+
+        if ('off' === $action) {
+            $db = Typecho_Db::get();
+            $db->query(
+                $db->delete('table.oauth_user')
+                    ->where('uid = ?', $this->user->uid)
+                    ->where('type = ?', $type)
+            );
+            $this->widget('Widget_Notice')->set(_t('已清除绑定：%s', $type));
+            $this->response->redirect(Typecho_Common::url('/connect/manage?toast=off&type=' . $type, $this->options->index));
+        } elseif ('on' === $action) {
+            @setcookie('TeConnect_Referer', Typecho_Common::url('/connect/manage', $this->options->index));
+            $this->response->redirect(Typecho_Common::url('/oauth?type='.$type, $this->options->index));
+        } else {
+            $this->widget('Widget_Notice')->set(_t('不支持的操作'), null, 'error');
+            $this->response->redirect(Typecho_Common::url('/connect/manage', $this->options->index));
+        }
+    }
+ 
+     //登录成功，获取腾讯QQ用户信息
     public function qq($token)
     {
         $qq = ThinkOauth::getInstance('qq', $token);
