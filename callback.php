@@ -19,6 +19,10 @@
         body {
             font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
             background-color: #f7f9fc;
+            background-image: url('./usr/plugins/TeConnect/else/background.png'); /* 替换为你的星空背景图片路径 */
+            background-size: cover; /* 确保背景图片覆盖整个屏幕 */
+            background-repeat: no-repeat; /* 防止背景图片重复 */
+            background-attachment: fixed; /* 固定背景图片，使其不随页面滚动 */
             color: #333;
             display: flex;
             justify-content: center;
@@ -27,24 +31,19 @@
             margin: 0;
         }
         .container {
-            background-color: #fff;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             width: 100%;
             max-width: 500px;
+            background-color: rgba(169, 199, 255, 0.7); /* 半透明的白色背景，提高可读性 */
+            padding: 30px;
+            border-radius: 15px; /* 增加圆角边框的半径 */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* 添加阴影效果 */
         }
         .header {
             text-align: center;
             padding: 40px 20px 20px; /* Adjusted padding */
-            background: #fff; /* White background */
             color: #333;
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 36px; /* Large font size */
-            font-weight: bold;
-            color: #007bff; /* Blue color for the title */
         }
         .header p {
             font-size: 16px;
@@ -54,16 +53,18 @@
         .main-content {
             padding: 20px;
         }
-        .login-section h2 {
+        .login-section h1 {
             text-align: center;
             color: #333;
             margin-bottom: 20px;
+        }
+        .login-section p {
+            text-align: center; /* 新增：使 <p> 标签中的文本居中对齐 */
         }
         .tabs {
             margin-bottom: 20px;
             list-style: none;
             padding: 0;
-            background: #e9ecef;
             display: flex;
             justify-content: space-around;
         }
@@ -73,10 +74,11 @@
             text-align: center;
             background: #ddd;
             color: #333;
-            border-radius: 5px;
+            border-radius: 10px;
             text-decoration: none;
             cursor: pointer;
             transition: background-color 0.3s;
+            flex: 1;
         }
         .tabs .tablinks.active {
             background: #007bff;
@@ -128,13 +130,11 @@
 </head>
 <body>
 <div class="container">
-    <header class="header">
-        <h1><a href="<?php $this->options->siteUrl(); ?>" style="text-decoration: none; color: #007bff;"><?php echo htmlspecialchars($this->options->title, ENT_QUOTES, 'UTF-8'); ?></a></h1>
-        <p><?php $this->options->description();?></p>
-    </header>
+
     <main class="main-content">
         <section class="login-section">
-            <h2>完善帐号信息</h2>
+        <h1><a href="<?php $this->options->siteUrl(); ?>" style="text-decoration: none; color: #007bff;"><?php echo htmlspecialchars($this->options->title, ENT_QUOTES, 'UTF-8'); ?></a></h1>
+        <p><?php $this->options->description();?></p>
             <div class="tabs">
                 <a href="javascript:void(0)" class="tablinks active" onclick="openTab(event, 'tab1')">绑定新账号</a>
                 <a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'tab2')">绑定已有账号</a>
