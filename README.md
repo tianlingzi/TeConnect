@@ -9,6 +9,8 @@ typecho第三方登录插件
 
 本人于2024年年底，在使用过程中，结合上面三位作者的修改进行融合修复，修改了部分设置和功能融合，在此特别说明并向三位作者的贡献表示感谢。
 
+2025.10，关于3.0版更新，由于插件缺少第三方登录管理页面，用户无法管理已经绑定的第三方服务，特此再次更新这个插件，增加了管理页面，并且进行了美化。
+
 ## 一、功能介绍
  **Typecho互联登录插件，目前已支持的第三方登录：QQ/微信/Github/Msn/Google/新浪微博/豆瓣/点点/淘宝网/百度。**
  后续会根据实际需要继续添加新的第三方接口，欢迎大家一起贡献。
@@ -75,6 +77,9 @@ Google | google | google:APP_KEY,APP_SECRET,Google | https://127.0.0.1/oauth_cal
 
 以本博客`www.tianlingzi.top`,设置QQ登录，为例：
 复制插件中给出的回调地址：`https://www.tianlingzi.top/oauth_callback?type=qq`
+
+## 四、管理页面
+在后台的“个人设置”页面中可以看到TeConnect设置，点击“打开管理页面”即可进入。
 
 [1]: https://github.com/jiangmuzi/TeConnect
 [2]: https://github.com/ledccn/TeConnect
