@@ -1,9 +1,14 @@
 # TeConnect
 typecho第三方登录插件
+
+本插件不再更新，请转到新版插件【TypechoOAuthLogin】
+
+插件网址：[适用于typecho的OAuth登录插件（第三方平台登录插件）][1]
+
 # 前言
 该插件的最初始的版本为[jiangmuzi/TeConnect][1]，最后维护时间为2016年。
 
-由大卫二次开发并修复：[ledccn/TeConnect][1]，最后维护时间为2020年。
+由大卫二次开发并修复：[ledccn/TeConnect][2]，最后维护时间为2020年。
 
 后由白雾林开发并修复：[baiwulin/ThirdLogin][3]，最后维护时间为2023年。
 
@@ -84,3 +89,4 @@ Google | google | google:APP_KEY,APP_SECRET,Google | https://127.0.0.1/oauth_cal
 [1]: https://github.com/jiangmuzi/TeConnect
 [2]: https://github.com/ledccn/TeConnect
 [3]: https://github.com/baiwulin/ThirdLogin
+[4]: https://github.com/tianlingzi/TypechoOAuthLogin
